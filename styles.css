@@ -1,0 +1,75 @@
+/* Core */
+:root{
+  --bg:#f6f7f9; --card:#ffffff; --text:#121417; --muted:#6b7280; --pri:#a1002b; --pri-600:#8b0026; --ring:#e5e7eb;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+img{max-width:100%;display:block}
+.container{max-width:980px;margin:0 auto;padding:0 16px}
+.container--narrow{max-width:420px}
+.row{display:flex;gap:12px}
+.center{align-items:center}
+.between{justify-content:space-between}
+.card{background:var(--card);border:1px solid var(--ring);border-radius:12px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+
+/* Topbar */
+.topbar{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--ring);z-index:50}
+.brand{display:flex;align-items:center;gap:10px;padding:10px 0}
+.brand-logo{width:28px;height:28px;object-fit:contain}
+.hero-logo{width:56px;margin:0 auto 10px;object-fit:contain}
+.brand-name{font-weight:600}
+.topbar-call{color:var(--pri);font-weight:600;text-decoration:none}
+.topbar-call:hover{color:var(--pri-600)}
+
+/* Hero + Booking */
+.hero{display:grid;grid-template-columns:1fr;gap:16px;margin:16px 0}
+.hero-card{text-align:center;padding:24px;border-radius:12px;background:var(--card);border:1px solid var(--ring)}
+.hero-logo{width:56px;margin:0 auto 10px}
+.hero-title{margin:0 0 6px;font-size:22px}
+.hero-sub{margin:0;color:var(--muted)}
+
+.booking{background:var(--card);border:1px solid var(--ring);border-radius:12px;padding:16px}
+.booking-title{margin:0 0 10px;font-size:18px}
+label{display:flex;flex-direction:column;gap:6px;margin-bottom:10px;font-size:12px;color:var(--muted)}
+input,select,textarea{font:inherit;padding:10px 12px;border:1px solid var(--ring);border-radius:10px;background:#fff;color:var(--text);}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(161,0,43,.1)}
+
+.btn{appearance:none;border:none;border-radius:10px;background:var(--pri);color:#fff;padding:12px 14px;font-weight:600;cursor:pointer;display:inline-block;text-align:center}
+.btn:hover{background:var(--pri-600)}
+.btn-secondary{background:#7a001f}
+.full{width:100%}
+.form-note{color:var(--muted);font-size:12px;margin:8px 0 0}
+
+/* Sections */
+.about{margin:12px 0}
+.services{margin:12px 0}
+.services h2{margin:0 0 12px}
+.services .grid{display:grid;grid-template-columns:1fr;gap:12px}
+.service img{border-radius:10px;border:1px solid var(--ring)}
+.service h3{margin:8px 0 0;font-size:14px;text-align:center}
+
+.testimonials{margin:12px 0}
+.testimonials h2{margin:0 0 8px}
+.quotes{display:grid;gap:8px}
+blockquote{margin:0;padding:10px 12px;border-left:3px solid var(--pri);background:#fafafa;border-radius:8px}
+
+.info{margin:12px 0}
+.keywords{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0;margin:0;list-style:none}
+.keywords li{padding:8px 10px;border:1px dashed var(--ring);border-radius:8px;background:#fff}
+
+/* Floating call */
+.floating-call{position:fixed;left:16px;right:16px;bottom:16px;background:var(--pri);color:#fff;border-radius:999px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;box-shadow:0 8px 24px rgba(161,0,43,.35);z-index:60}
+.floating-call:hover{background:var(--pri-600)}
+
+/* Footer */
+.footer{margin-top:32px;background:#0f172a;color:#e5e7eb;padding:24px 0}
+.footer a{color:#fff}
+.footer-cols{display:grid;grid-template-columns:1fr;gap:12px;margin:12px 0}
+.disclaimer{font-size:12px;color:#cbd5e1}
+
+/* Wide screens */
+@media (min-width: 960px){
+  body.wide .hero{grid-template-columns:1fr 360px;align-items:start}
+  .footer-cols{grid-template-columns:1fr 1fr}
+}

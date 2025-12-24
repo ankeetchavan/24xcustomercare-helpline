@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Appliqart Service</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, sans-serif; background:#f8f8f8; color:#333; }
+
+/* Header */
+header {
+    background:#fff;
+    padding:10px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #ddd;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+header img { max-height:60px; }
+header a { font-size:20px; font-weight:bold; text-decoration:none; color:#333; }
+
+/* Unified section: grid with two equal columns */
+.section-grid {
+  max-width:1100px;
+  margin:20px auto;
+  padding:0 12px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:20px;
+  align-items:stretch;
+}
+
+/* Panels inside grid */
+.panel {
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:8px;
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+
+/* Brand (left) */
+.brand-panel { text-align:center; }
+#brandLogo { width: 220px; max-width:80%; height:auto; margin:8px auto 16px; transition: transform .25s ease; }
+#brandHeadline { font-size:22px; font-weight:700; color:#222; margin-bottom:8px; }
+#brandDescription { font-size:15px; color:#555; line-height:1.5; max-width:520px; margin:0 auto; }
+
+/* Form (right) */
+.form-panel { padding:20px 24px; }
+form { width:100%; display:flex; flex-direction:column; gap:10px; }
+input, select, button, textarea {
+    width:100%;
+    padding:12px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:15px;
+    box-sizing:border-box;
+}
+.select-row { display:flex; gap:10px; }
+.select-row select { width:100%; }
+button {
+    border:none;
+    font-weight:700;
+    cursor:pointer;
+    background:#00bfff;
+    color:#fff;
+    padding:12px;
+    transition:opacity .15s, transform .08s;
+}
+button:hover { opacity:0.92; transform:translateY(-1px); }
+
+/* Ensure equal height visuals */
+.panel-inner { flex:1 1 auto; display:flex; flex-direction:column; }
+
+/* About Us section */
+.about-section {
+  max-width:1100px;
+  margin:18px auto;
+  padding:0 12px;
+}
+.about-card {
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:8px;
+  padding:20px;
+}
+.about-card h3 { font-size:20px; margin-bottom:8px; color:#222; }
+.about-card p { color:#555; line-height:1.6; }
+
+/* Services, testimonials, contact, footer */
+.services-section { max-width:1200px; margin:20px auto; text-align:center; }
+.services { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+.service { flex:1 1 250px; background:#fff; padding:20px; border-radius:8px; text-align:center; border:1px solid #ddd; transition:transform .2s; }
+.service img { width:100%; height:auto; border-radius:8px; margin-bottom:10px; }
+
+.testimonials-section { max-width:1200px; margin:20px auto; text-align:center; }
+.testimonials { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+.testimonial {
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:8px;
+  padding:14px;
+  font-size:14px;
+}
+
+/* Contact */
+.contact-container {
+  max-width:1100px;
+  margin:20px auto;
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.contact-info, .contact-map {
+  flex:1;
+  min-width:260px;
+  border:1px solid #ddd;
+  padding:20px;
+  border-radius:8px;
+}
+iframe { width:100%; height:250px; border:0; border-radius:8px; }
+
+/* Keywords section */
+.keywords-section {
+  max-width:1100px;
+  margin:20px auto;
+  padding:0 12px;
+}
+.keywords-card {
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:8px;
+  padding:20px;
+}
+.keywords-card h3 {
+  font-size:20px;
+  margin-bottom:10px;
+  color:#222;
+}
+.keywords-card ul {
+  list-style:disc;
+  padding-left:20px;
+  margin:0;
+  columns:2;
+  column-gap:30px;
+}
+.keywords-card li {
+  font-size:14px;
+  color:#555;
+  margin-bottom:4px;
+}
+@media (max-width: 600px) {
+  .keywords-card ul { columns:1; }
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+  color: #fff;
+  padding: 40px 20px 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+.footer-container {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+  max-width:1100px;
+  margin:0 auto;
+}
+.footer-section p,
+.footer-section a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Floating call button */
+.floating-call-btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #28a745;
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 9999;
+    box-shadow: 0 -2px 10px rgba(0,0,0,.18);
+    transition: transform .12s ease, filter .12s ease;
+}
+.floating-call-btn:active { transform: translateY(1px); }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .section-grid { grid-template-columns: 1fr; }
+  .select-row { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <img src="assets/images/lg.png" alt="Logo" id="headerLogo">
+    <a href="#">Service Center</a>
+    
+</header>
+
+<!-- Unified section: LEFT = BRAND, RIGHT = FORM -->
+<section class="section-grid" aria-label="Brand and Booking">
+  <!-- LEFT: Brand panel -->
+  <div class="panel brand-panel" id="brandPanel">
+    <div class="panel-inner">
+      <img id="brandLogo" src="assets/images/lg.png" alt="Brand Logo">
+      <h2 id="brandHeadline">LG service Center</h2>
+      <p id="brandDescription">Expert technicians for all brands and appliances. Book your service now!</p>
+    </div>
+  </div>
+
+  <!-- RIGHT: Form panel -->
+  <div class="panel form-panel" id="formPanel">
+    <div class="panel-inner">
+      <h2 style="margin-bottom:8px;">Book Service</h2>
+      <form id="queryForm">
+        <!-- Web3Forms access key -->
+        <input type="hidden" name="access_key" value="9cd58b4a-5f68-4c5b-b48b-e820dce3d698">
+        <input type="hidden" name="brand_keyword" id="brandKeyword">
+        <input type="hidden" name="brand_headline" id="brandHeadlineHidden">
+
+        <input type="text" name="name" placeholder="Your Name" required>
+
+        <!-- phone: numbers only, required -->
+        <input
+          type="tel"
+          name="phone"
+          id="phoneField"
+          placeholder="Phone Number"
+          required
+          inputmode="numeric"
+          maxlength="10"
+        >
+
+        <!-- City field -->
+        <input type="text" name="city" placeholder="City" required>
+
+        <!-- Email optional -->
+        <input type="email" name="email" placeholder="Email Address">
+
+        <select name="appliance" required>
+          <option value="">Select Appliance</option>
+          <option>AC</option>
+          <option>Refrigerator</option>
+          <option>Washing Machine</option>
+          <option>Microwave</option>
+          <option>TV</option>
+          <option>Dishwasher</option>
+          <option>Dryer</option>
+          <option>Other</option>
+        </select>
+
+        <select name="warranty" required>
+          <option value="">Warranty Status</option>
+          <option>In Warranty</option>
+          <option>Out of Warranty</option>
+        </select>
+
+        <label style="display:block; margin-top:8px; color:#444; font-size:14px;">Date of Purchase (optional)</label>
+        <div class="select-row" aria-hidden="false">
+          <select name="purchase_month" id="purchase_month" aria-label="Purchase month">
+            <option value="">Month</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+          </select>
+
+          <select name="purchase_year" id="purchase_year" aria-label="Purchase year">
+            <option value="">Year</option>
+            <!-- filled by JS -->
+          </select>
+        </div>
+
+        <button type="submit" id="formSubmit">Submit Query</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- About Us -->
+<section class="about-section" aria-label="About Us">
+  <div class="about-card">
+    <h3 id="aboutHeading"></h3>
+    <p id="aboutText">
+      We connect you with skilled technicians across major cities for timely appliance repair and maintenance.
+      Our team focuses on clear diagnostics, honest pricing and fast resolution so your home runs smoothly.
+      Whether it’s installation, part replacement or routine service, expect professional work, warranty-safe practices,
+      and follow-up support. We also source genuine parts where available and offer guidance on keeping appliances efficient.
+    </p>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services-section">
+  <h2>Our Services</h2>
+  <div class="services">
+    <div class="service"><img src="assets/images/ac.png" alt=""><h3>AC Repair & Service</h3></div>
+    <div class="service"><img src="assets/images/fridge.png" alt=""><h3>Refrigerator Service</h3></div>
+    <div class="service"><img src="assets/images/washing.png" alt=""><h3>Washing Machine Repair</h3></div>
+    <div class="service"><img src="assets/images/oven.png" alt=""><h3>Oven Repair</h3></div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section">
+  <h2>Customer Testimonials</h2>
+  <div class="testimonials">
+    <div class="testimonial">"Great service and quick response!" - Ravi</div>
+    <div class="testimonial">"Affordable prices and polite staff." - Anjali</div>
+    <div class="testimonial">"Fixed my AC in just a few hours." - Sameer</div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-container" aria-label="Contact and location">
+  <div class="contact-info">
+    <p>📞 Phone: 18003091619</p>
+    <p>📧 Email: info@customer-service-point.in</p>
+    <p>🏢 Address: OFFICE NO 5, Lucknow, Uttar Pradesh</p>
+    <!-- Map ke niche brand wise line -->
+    <p id="brandLocationLine">
+      Multi-brand home appliance service centre in Lucknow
+    </p>
+  </div>
+  <div class="contact-map">
+    <iframe src="https://maps.google.com/maps?q=Lucknow%2C%20Uttar%20Pradesh&t=&z=13&ie=UTF8&iwloc=&output=embed" title="Lucknow map"></iframe>
+  </div>
+</section>
+
+<!-- Keywords section: 50 keyword list brand ke hisaab se -->
+<section class="keywords-section" aria-label="Popular search keywords">
+  <div class="keywords-card">
+    <h3 id="keywordHeading">Popular service-related search keywords</h3>
+    <ul id="keywordList"></ul>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3 style="color:#fff;">Disclaimer</h3>
+      <p>We are an independent service provider and are not authorized associate partners from any brands. Local repair vendors perform all services and repairs.</p>
+    </div>
+    <div class="footer-section">
+      <h3 style="color:#fff;">Business Info</h3>
+      <p><strong>Company:</strong> Appliqart service</p>
+      <p><strong>Owner:</strong> Appliqart</p>
+      <p>Website: <a href="https://services-centres-24x7.in/" target="_blank" rel="noopener">services-centres-24x7.in</a></p>
+    </div>
+    <div class="footer-section">
+      <h3 style="color:#fff;">Contact Us</h3>
+      <p><a href="tel:18003091619">18003091619</a></p>
+      <p><a href="mailto:info@customer-support-24x7.in">info@customer-support-24x7.in</a></p>
+      <p>OFFICE NO 5, Lucknow, Uttar Pradesh</p>
+    </div>
+  </div>
+  <div style="text-align:center; padding-top:15px; color:#fff;">© 2025 Customer Service Point | Powered By Ads Web Lab</div>
+</footer>
+
+<a href="tel:18003091619" class="floating-call-btn" id="callBtn">📞 Call Now 18003091619 </a>
+
+<script>
+// populate year dropdown from 2000 up to current year
+(function populateYears(){
+    const yearSelect = document.getElementById('purchase_year');
+    if (!yearSelect) return;
+    const startYear = 2000;
+    const currentYear = new Date().getFullYear();
+    for (let y = currentYear; y >= startYear; y--) {
+        const opt = document.createElement('option');
+        opt.value = String(y);
+        opt.textContent = String(y);
+        yearSelect.appendChild(opt);
+    }
+})();
+
+// brand data
+const brandData = {
+    samsung: {
+      logo: "assets/images/samsung.png",
+      headline: "Samsung Service Centre",
+      description: "Expert technicians for Samsung appliances.",
+      about: "Samsung-certified technicians, genuine spare parts, and specialized repair services for Samsung TVs, ACs and refrigerators. Fast diagnostics, flexible appointment slots and transparent pricing. We focus on preserving warranty where applicable and use manufacturer-recommended parts.",
+      color: "#1428A0"
+    },
+    lg: {
+      logo: "assets/images/lg.png",
+      headline: "LG Service Centre",
+      description: "Fast and reliable LG appliance repair services.",
+      about: "LG-trained technicians offering professional repairs, warranty-safe servicing and preventive maintenance. We handle LG refrigerators, washing machines, ACs and TVs with care, prioritizing long-term reliability and energy efficiency.",
+      color: "#A50034"
+    },
+    whirlpool: {
+      logo: "assets/images/whirlpool.png",
+      headline: "Whirlpool Service Centre",
+      description: "Trusted Whirlpool appliance repairs.",
+      about: "Whirlpool appliance experts providing installation, routine service, and part replacement with clear estimates and prompt turnaround. Ideal for busy households needing dependable support.",
+      color: "#0072CE"
+    },
+    godrej: {
+      logo: "assets/images/godrej.png",
+      headline: "Godrej Service Centre",
+      description: "Professional Godrej repairs.",
+      about: "Professional technicians experienced with Godrej refrigerators and appliances; we provide honest diagnostics, OEM-part options and transparent service timelines.",
+      color: "#004B87"
+    },
+    panasonic: {
+      logo: "assets/images/panasonic.png",
+      headline: "Panasonic Service Centre",
+      description: "Reliable Panasonic appliance servicing.",
+      about: "Panasonic service specialists focusing on durable repairs and preventive maintenance to keep your appliances running longer with optimal performance.",
+      color: "#00338D"
+    },
+    sharp: {
+      logo: "assets/images/sharp.png",
+      headline: "Sharp Service Centre",
+      description: "Professional service for Sharp electronics.",
+      about: "Sharp appliance repair and maintenance with expert technicians emphasizing electrical safety and component quality for lasting fixes.",
+      color: "#E60012"
+    },
+    toshiba: {
+      logo: "assets/images/toshiba.png",
+      headline: "Toshiba Service Centre",
+      description: "Expert care for Toshiba appliances.",
+      about: "Toshiba-focused technicians offering professional repairs, installation and part replacement with clear estimates and reliable workmanship.",
+      color: "#E4002B"
+    },
+    liebherr: {
+      logo: "assets/images/liebherr.png",
+      headline: "Liebherr Service Centre",
+      description: "Quality Liebherr appliance services.",
+      about: "Specialized service for Liebherr refrigeration units and appliances, concentrating on cooling performance, temperature stability and energy efficiency.",
+      color: "#0A5D8E"
+    },
+    hitachi: {
+      logo: "assets/images/hitachi.png",
+      headline: "Hitachi Service Centre",
+      description: "Trusted Hitachi appliance repairs.",
+      about: "Hitachi appliance technicians providing on-site repairs, spare parts sourcing and periodic maintenance plans to keep your appliances dependable.",
+      color: "#0D4A9C"
+    },
+    siemens: {
+      logo: "assets/images/siemens.png",
+      headline: "Siemens Service Centre",
+      description: "Professional Siemens appliance support.",
+      about: "Siemens-certified approach for electrical and electronic repairs, focusing on precision, component compatibility and safe servicing.",
+      color: "#0D6E54"
+    },
+    bosch: {
+      logo: "assets/images/bosch.png",
+      headline: "Bosch Service Centre",
+      description: "Expert Bosch appliance maintenance.",
+      about: "Bosch appliance experts offering professional servicing, genuine parts and trained technicians for advanced home appliances and diagnostics.",
+      color: "#ED1C24"
+    },
+    haier: {
+      logo: "assets/images/haier.png",
+      headline: "Haier Service Centre",
+      description: "Fast repair for Haier home appliances.",
+      about: "Haier appliance technicians ready for fast repairs, installation and preventive maintenance with customer-first service.",
+      color: "#0B6CA8"
+    },
+    electrolux: {
+      logo: "assets/images/electrolux.png",
+      headline: "Electrolux Service Centre",
+      description: "Trusted Electrolux appliance services.",
+      about: "Electrolux repair and maintenance specialists focused on durability and efficient repair workflows for kitchen and laundry appliances.",
+      color: "#006699"
+    },
+    ifb: {
+      logo: "assets/images/ifb.png",
+      headline: "IFB Service Centre",
+      description: "Dedicated IFB home appliance support.",
+      about: "IFB washing machine and kitchen appliance specialists providing diagnostics, part replacement and installation support with clear guidance.",
+      color: "#004B8D"
+    }
+};
+
+// default about + color
+const defaultAbout = {
+  heading: "About Us",
+  text: "We connect you with skilled technicians across major cities for timely appliance repair and maintenance. Our team focuses on clear diagnostics, honest pricing and fast resolution so your home runs smoothly. Whether it’s installation, part replacement or routine service, expect professional work, warranty-safe practices and follow-up support. We source quality parts where available, offer helpful maintenance tips and prioritize customer safety and satisfaction.",
+  color: "#28a745"
+};
+
+// 50 keyword generator for a brand
+function getBrandKeywords(brandLabel, city) {
+  const cityName = city || "Lucknow";
+  return [
+    `${brandLabel} service centre`,
+    `${brandLabel} service centre near me`,
+    `${brandLabel} customer care number`,
+    `${brandLabel} customer care service`,
+    `${brandLabel} washing machine service centre`,
+    `${brandLabel} washing machine repair`,
+    `${brandLabel} washing machine repair service`,
+    `${brandLabel} refrigerator service centre`,
+    `${brandLabel} fridge repair service`,
+    `${brandLabel} ac service centre`,
+    `${brandLabel} ac repair service`,
+    `${brandLabel} ac gas filling`,
+    `${brandLabel} tv service centre`,
+    `${brandLabel} led tv repair`,
+    `${brandLabel} microwave oven service centre`,
+    `${brandLabel} oven repair service`,
+    `${brandLabel} dishwasher service centre`,
+    `${brandLabel} home appliance service centre`,
+    `${brandLabel} authorised service centre`,
+    `${brandLabel} out of warranty service`,
+    `${brandLabel} installation service`,
+    `${brandLabel} uninstall service`,
+    `${brandLabel} appliance repair at home`,
+    `${brandLabel} same day service`,
+    `${brandLabel} door step service`,
+    `${brandLabel} technician near me`,
+    `${brandLabel} repair centre`,
+    `${brandLabel} home service`,
+    `${brandLabel} top load washing machine repair`,
+    `${brandLabel} front load washing machine repair`,
+    `${brandLabel} double door fridge repair`,
+    `${brandLabel} inverter ac service`,
+    `${brandLabel} split ac service centre`,
+    `${brandLabel} window ac service centre`,
+    `${brandLabel} smart tv repair`,
+    `${brandLabel} warranty claim support`,
+    `${brandLabel} pcb repair service`,
+    `${brandLabel} compressor repair service`,
+    `${brandLabel} washing machine installation`,
+    `${brandLabel} fridge gas refill`,
+    `${brandLabel} ac deep cleaning`,
+    `${brandLabel} tv wall mount`,
+    `${brandLabel} multi brand service centre`,
+    `${brandLabel} emergency repair service`,
+    `${brandLabel} 24x7 service centre`,
+    `${brandLabel} helpline number`,
+    `${brandLabel} repair booking online`,
+    `${brandLabel} service request online`,
+    `${brandLabel} service complaint number`,
+    `${brandLabel} service centre in ${cityName}`
+  ];
+}
+
+function getURLParameter(name) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+const keywordParam = getURLParameter("keyword").toLowerCase();
+let foundBrandKey = "";
+for (const brand in brandData) {
+  if (keywordParam.includes(brand)) {
+    foundBrandKey = brand;
+    break;
+  }
+}
+
+const logoEl = document.getElementById("brandLogo");
+const headlineEl = document.getElementById("brandHeadline");
+const descEl = document.getElementById("brandDescription");
+const aboutHeadingEl = document.getElementById("aboutHeading");
+const aboutTextEl = document.getElementById("aboutText");
+const headerLogoEl = document.getElementById("headerLogo");
+const formSubmitBtn = document.getElementById("formSubmit");
+const brandKeywordHidden = document.getElementById("brandKeyword");
+const brandHeadlineHidden = document.getElementById("brandHeadlineHidden");
+const callBtn = document.getElementById("callBtn");
+const brandLocationLineEl = document.getElementById("brandLocationLine");
+const keywordHeadingEl = document.getElementById("keywordHeading");
+const keywordListEl = document.getElementById("keywordList");
+
+// city fixed for now (Lucknow)
+const pageCity = "Lucknow";
+
+if(foundBrandKey){
+    const b = brandData[foundBrandKey];
+    if (logoEl) logoEl.src = b.logo;
+    if (headlineEl) headlineEl.innerText = b.headline;
+    if (descEl) descEl.innerText = b.description;
+    if (aboutHeadingEl) aboutHeadingEl.innerText = b.headline + " - About Us";
+    if (aboutTextEl) aboutTextEl.innerText = b.about;
+    if (headerLogoEl) headerLogoEl.src = b.logo;
+    if (formSubmitBtn) formSubmitBtn.style.background = b.color;
+    if (brandKeywordHidden) brandKeywordHidden.value = foundBrandKey;
+    if (brandHeadlineHidden) brandHeadlineHidden.value = b.headline;
+    if (callBtn && b.color) {
+      callBtn.style.background = b.color;
+      callBtn.addEventListener('mouseenter', ()=> callBtn.style.filter = 'brightness(.9)');
+      callBtn.addEventListener('mouseleave', ()=> callBtn.style.filter = 'none');
+    }
+
+    // Map ke niche text
+    if (brandLocationLineEl) {
+      const shortBrandName = b.headline.replace("Service Centre", "").trim();
+      brandLocationLineEl.textContent =
+        `${b.headline}, ${shortBrandName} washing machine, fridge, AC service in ${pageCity}`;
+    }
+
+    // 50 brand-wise keywords
+    if (keywordHeadingEl) {
+      keywordHeadingEl.textContent = `${b.headline} - popular service search keywords`;
+    }
+    if (keywordListEl) {
+      keywordListEl.innerHTML = "";
+      const shortBrandName = b.headline.replace("Service Centre", "").trim();
+      const brandKeywords = getBrandKeywords(shortBrandName, pageCity);
+      brandKeywords.forEach(k => {
+        const li = document.createElement("li");
+        li.textContent = k;
+        keywordListEl.appendChild(li);
+      });
+    }
+} else {
+    // No brand in keyword
+    if (aboutHeadingEl) aboutHeadingEl.innerText = defaultAbout.heading;
+    if (aboutTextEl) aboutTextEl.innerText = defaultAbout.text;
+    if (callBtn) {
+      callBtn.style.background = defaultAbout.color;
+      callBtn.addEventListener('mouseenter', ()=> callBtn.style.filter = 'brightness(.9)');
+      callBtn.addEventListener('mouseleave', ()=> callBtn.style.filter = 'none');
+    }
+    if (brandLocationLineEl) {
+      brandLocationLineEl.textContent =
+        "Multi-brand home appliance service centre in " + pageCity;
+    }
+    if (keywordHeadingEl) {
+      keywordHeadingEl.textContent =
+        "Home appliance service - popular search keywords";
+    }
+    if (keywordListEl) {
+      keywordListEl.innerHTML = "";
+      const genericKeywords = getBrandKeywords("home appliance", pageCity);
+      genericKeywords.forEach(k => {
+        const li = document.createElement("li");
+        li.textContent = k;
+        keywordListEl.appendChild(li);
+      });
+    }
+}
+
+// phone field: only numbers allowed
+const phoneInput = document.getElementById("phoneField");
+if (phoneInput) {
+  phoneInput.addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, "");
+  });
+}
+
+// Form submission with validation + duplicate check
+document.getElementById("queryForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    const name = (formData.get("name") || "").trim();
+    const phone = (formData.get("phone") || "").trim();
+    const city  = (formData.get("city") || "").trim();
+    const appliance = (formData.get("appliance") || "").trim();
+    const warranty = (formData.get("warranty") || "").trim();
+
+    // basic required check (email optional)
+    if (!name || !phone || !city || !appliance || !warranty) {
+        alert("Please fill all required fields (Name, Phone, City, Appliance, Warranty).");
+        return;
+    }
+
+    // phone number 10 digit only
+    if (!/^[0-9]{10}$/.test(phone)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return;
+    }
+
+    // duplicate check by phone number
+    const lastPhone = localStorage.getItem("last_submitted_phone");
+    if (lastPhone === phone) {
+        alert("Aapne is number se pehle hi request bhej di hai. Hamara customer care jaldi aapko call karega.");
+        return;
+    }
+
+    fetch("https://api.web3forms.com/submit",{method:"POST",body:formData})
+    .then(res=>res.json())
+    .then(result=>{
+        if(result.success){
+            const purchaseMonth = formData.get("purchase_month") || '';
+            const purchaseYear = formData.get("purchase_year") || '';
+            const purchaseText = (purchaseMonth || purchaseYear)
+              ? `<p><strong>Purchase Date:</strong> ${purchaseMonth ? purchaseMonth : ''} ${purchaseYear ? purchaseYear : ''}</p>`
+              : '';
+
+            // save phone in localStorage after success
+            localStorage.setItem("last_submitted_phone", phone);
+
+            document.querySelector('.form-panel .panel-inner').innerHTML = `
+            <div class="success-message">
+                <h2>✅ Thank You, ${name}!</h2>
+                <p>Your request has been received.</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>City:</strong> ${city}</p>
+                <p><strong>Appliance:</strong> ${appliance}</p>
+                <p><strong>Warranty:</strong> ${warranty}</p>
+                ${purchaseText}
+                <p>📞 Our Customer Care will contact you soon.</p>
+                <p><strong>Customer Care No:</strong> 18003091619</p>
+            </div>`;
+        } else {
+            alert("Error submitting form. Please try again.");
+        }
+    })
+    .catch(()=>{
+        alert("Something went wrong. Please try again.");
+    });
+});
+</script>
+
+</body>
+</html>
