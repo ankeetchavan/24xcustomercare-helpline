@@ -1,6 +1,6 @@
 # Service Center Template
 
-This is a clean, responsive template that mirrors the layout shown in your screenshot, with placeholders for assets and your phone number pre-wired (18003091619).
+This is a clean, responsive template that mirrors the layout shown in your screenshot, with placeholders for assets and your phone number pre-wired (18005691141).
 
 ## Quick Start
 

@@ -8,6 +8,6 @@ Brand pages generated:
 
 Notes:
 - Logos load from ../assets/images/<brand>.png with an onerror fallback to ../assets/images/brand-placeholder.svg.
-- All phone CTAs: 18003091619.
+- All phone CTAs: 18005691141.
 - Inline CSS/JS matches the main template for a consistent layout.
 - Replace logos by adding the correct PNGs to assets/images/.

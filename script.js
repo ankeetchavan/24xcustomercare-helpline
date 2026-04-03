@@ -27,7 +27,7 @@
 
     // For now, just prepare a tel: to call; optionally mailto:
     if(confirm('Submit your request and dial support?')){
-      window.location.href = 'tel:18003091619';
+      window.location.href = 'tel:18005691141';
     } else {
       // Optionally open email draft
       const subject = encodeURIComponent('Service Request');
