@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Appliqart Service</title>
+<title>AC Service Center</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family: Arial, sans-serif; background:#f8f8f8; color:#333; }
@@ -316,12 +316,12 @@ footer {
 
 <!-- Services -->
 <section class="services-section">
-  <h2>Our Services</h2>
+  <h2>Our AC Services</h2>
   <div class="services">
-    <div class="service"><img src="assets/images/ac.png" alt=""><h3>AC Repair & Service</h3></div>
-    <div class="service"><img src="assets/images/fridge.png" alt=""><h3>Refrigerator Service</h3></div>
-    <div class="service"><img src="assets/images/washing.png" alt=""><h3>Washing Machine Repair</h3></div>
-    <div class="service"><img src="assets/images/oven.png" alt=""><h3>Oven Repair</h3></div>
+    <div class="service"><img src="assets/images/ac.png" alt=""><h3>Split AC Repair</h3></div>
+    <div class="service"><img src="assets/images/ac.png" alt=""><h3>Window AC Service</h3></div>
+    <div class="service"><img src="assets/images/ac.png" alt=""><h3>Inverter AC Installation</h3></div>
+    <div class="service"><img src="assets/images/ac.png" alt=""><h3>AC Gas Filling</h3></div>
   </div>
 </section>
 
@@ -498,13 +498,55 @@ const brandData = {
       description: "Dedicated IFB home appliance support.",
       about: "IFB washing machine and kitchen appliance specialists providing diagnostics, part replacement and installation support with clear guidance.",
       color: "#004B8D"
+    },
+    daikin: {
+      logo: "assets/images/daikin.png",
+      headline: "Daikin AC Service Centre",
+      description: "Professional Daikin AC repair and maintenance services.",
+      about: "Daikin AC specialists providing installation, repair, gas filling and preventive maintenance. We ensure optimal cooling performance and energy efficiency for your Daikin air conditioners.",
+      color: "#0052A5"
+    },
+    "o general": {
+      logo: "assets/images/ogeneral.png",
+      headline: "O General AC Service Centre",
+      description: "Reliable O General AC servicing.",
+      about: "O General AC experts offering professional repairs, installation and maintenance with a focus on durability and quiet operation.",
+      color: "#FF6600"
+    },
+    carrier: {
+      logo: "assets/images/carrier.png",
+      headline: "Carrier AC Service Centre",
+      description: "Trusted Carrier AC repairs.",
+      about: "Carrier AC technicians providing comprehensive services including repair, installation and gas refilling with genuine parts.",
+      color: "#D32F2F"
+    },
+    voltas: {
+      logo: "assets/images/voltas.png",
+      headline: "Voltas AC Service Centre",
+      description: "Expert Voltas AC maintenance.",
+      about: "Voltas AC specialists for all your cooling needs, from repairs to installations, ensuring reliable and efficient performance.",
+      color: "#4CAF50"
+    },
+    mitsubishi: {
+      logo: "assets/images/mitsubishi.png",
+      headline: "Mitsubishi AC Service Centre",
+      description: "Professional Mitsubishi AC services.",
+      about: "Mitsubishi AC repair and maintenance experts focusing on advanced technology and long-lasting solutions.",
+      color: "#9C27B0"
+    },
+    bluestar: {
+      logo: "assets/images/bluestar.png",
+      headline: "Blue Star AC Service Centre",
+      description: "Quality Blue Star AC support.",
+      about: "Blue Star AC service professionals offering repairs, installations and maintenance for optimal home comfort.",
+      color: "#2196F3"
     }
 };
 
 // default about + color
 const defaultAbout = {
-  heading: "About Us",
-  text: "We connect you with skilled technicians across major cities for timely appliance repair and maintenance. Our team focuses on clear diagnostics, honest pricing and fast resolution so your home runs smoothly. Whether it’s installation, part replacement or routine service, expect professional work, warranty-safe practices and follow-up support. We source quality parts where available, offer helpful maintenance tips and prioritize customer safety and satisfaction.",
+  heading: "AC Service - About Us",
+  text: "We specialize in air conditioner repair and maintenance services across major cities. Our certified technicians provide fast diagnostics, honest pricing and reliable solutions for all AC brands. From gas filling to compressor repairs, expect professional work, warranty-safe practices and follow-up support. We source genuine parts and offer tips for efficient AC usage.",
   color: "#28a745"
 };
 
@@ -512,56 +554,57 @@ const defaultAbout = {
 function getBrandKeywords(brandLabel, city) {
   const cityName = city || "Lucknow";
   return [
-    `${brandLabel} service centre`,
-    `${brandLabel} service centre near me`,
-    `${brandLabel} customer care number`,
-    `${brandLabel} customer care service`,
-    `${brandLabel} washing machine service centre`,
-    `${brandLabel} washing machine repair`,
-    `${brandLabel} washing machine repair service`,
-    `${brandLabel} refrigerator service centre`,
-    `${brandLabel} fridge repair service`,
     `${brandLabel} ac service centre`,
+    `${brandLabel} ac service centre near me`,
+    `${brandLabel} ac repair`,
     `${brandLabel} ac repair service`,
     `${brandLabel} ac gas filling`,
-    `${brandLabel} tv service centre`,
-    `${brandLabel} led tv repair`,
-    `${brandLabel} microwave oven service centre`,
-    `${brandLabel} oven repair service`,
-    `${brandLabel} dishwasher service centre`,
-    `${brandLabel} home appliance service centre`,
-    `${brandLabel} authorised service centre`,
-    `${brandLabel} out of warranty service`,
-    `${brandLabel} installation service`,
-    `${brandLabel} uninstall service`,
-    `${brandLabel} appliance repair at home`,
-    `${brandLabel} same day service`,
-    `${brandLabel} door step service`,
-    `${brandLabel} technician near me`,
-    `${brandLabel} repair centre`,
-    `${brandLabel} home service`,
-    `${brandLabel} top load washing machine repair`,
-    `${brandLabel} front load washing machine repair`,
-    `${brandLabel} double door fridge repair`,
+    `${brandLabel} split ac service`,
+    `${brandLabel} window ac service`,
     `${brandLabel} inverter ac service`,
-    `${brandLabel} split ac service centre`,
-    `${brandLabel} window ac service centre`,
-    `${brandLabel} smart tv repair`,
-    `${brandLabel} warranty claim support`,
-    `${brandLabel} pcb repair service`,
-    `${brandLabel} compressor repair service`,
-    `${brandLabel} washing machine installation`,
-    `${brandLabel} fridge gas refill`,
+    `${brandLabel} ac installation`,
+    `${brandLabel} ac uninstall`,
+    `${brandLabel} ac maintenance`,
     `${brandLabel} ac deep cleaning`,
-    `${brandLabel} tv wall mount`,
-    `${brandLabel} multi brand service centre`,
-    `${brandLabel} emergency repair service`,
-    `${brandLabel} 24x7 service centre`,
-    `${brandLabel} helpline number`,
-    `${brandLabel} repair booking online`,
-    `${brandLabel} service request online`,
-    `${brandLabel} service complaint number`,
-    `${brandLabel} service centre in ${cityName}`
+    `${brandLabel} ac compressor repair`,
+    `${brandLabel} ac pcb repair`,
+    `${brandLabel} ac technician near me`,
+    `${brandLabel} ac emergency repair`,
+    `${brandLabel} ac same day service`,
+    `${brandLabel} ac door step service`,
+    `${brandLabel} ac authorised service centre`,
+    `${brandLabel} ac out of warranty service`,
+    `${brandLabel} ac customer care number`,
+    `${brandLabel} ac helpline`,
+    `${brandLabel} ac service booking online`,
+    `${brandLabel} ac repair booking`,
+    `${brandLabel} ac service request`,
+    `${brandLabel} ac complaint number`,
+    `${brandLabel} ac service centre in ${cityName}`,
+    `${brandLabel} air conditioner service`,
+    `${brandLabel} aircon repair`,
+    `${brandLabel} cooling service`,
+    `${brandLabel} ac repair at home`,
+    `${brandLabel} home ac service`,
+    `${brandLabel} residential ac repair`,
+    `${brandLabel} commercial ac service`,
+    `${brandLabel} ducted ac repair`,
+    `${brandLabel} cassette ac service`,
+    `${brandLabel} tower ac repair`,
+    `${brandLabel} portable ac service`,
+    `${brandLabel} ac filter cleaning`,
+    `${brandLabel} ac coil cleaning`,
+    `${brandLabel} ac drainage issue`,
+    `${brandLabel} ac not cooling`,
+    `${brandLabel} ac leaking water`,
+    `${brandLabel} ac making noise`,
+    `${brandLabel} ac remote not working`,
+    `${brandLabel} ac timer not working`,
+    `${brandLabel} ac warranty claim`,
+    `${brandLabel} ac genuine parts`,
+    `${brandLabel} ac preventive maintenance`,
+    `${brandLabel} ac annual service`,
+    `${brandLabel} ac energy saving tips`
   ];
 }
 
@@ -572,13 +615,10 @@ function getURLParameter(name) {
   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-const keywordParam = getURLParameter("keyword").toLowerCase();
+const brandParam = getURLParameter("brand").toLowerCase();
 let foundBrandKey = "";
-for (const brand in brandData) {
-  if (keywordParam.includes(brand)) {
-    foundBrandKey = brand;
-    break;
-  }
+if (brandParam && brandData[brandParam]) {
+  foundBrandKey = brandParam;
 }
 
 const logoEl = document.getElementById("brandLogo");
@@ -619,7 +659,7 @@ if(foundBrandKey){
     if (brandLocationLineEl) {
       const shortBrandName = b.headline.replace("Service Centre", "").trim();
       brandLocationLineEl.textContent =
-        `${b.headline}, ${shortBrandName} washing machine, fridge, AC service in ${pageCity}`;
+        `${b.headline}, ${shortBrandName} AC service in ${pageCity}`;
     }
 
     // 50 brand-wise keywords
@@ -647,15 +687,15 @@ if(foundBrandKey){
     }
     if (brandLocationLineEl) {
       brandLocationLineEl.textContent =
-        "Multi-brand home appliance service centre in " + pageCity;
+        "Multi-brand AC service centre in " + pageCity;
     }
     if (keywordHeadingEl) {
       keywordHeadingEl.textContent =
-        "Home appliance service - popular search keywords";
+        "AC service - popular search keywords";
     }
     if (keywordListEl) {
       keywordListEl.innerHTML = "";
-      const genericKeywords = getBrandKeywords("home appliance", pageCity);
+      const genericKeywords = getBrandKeywords("ac", pageCity);
       genericKeywords.forEach(k => {
         const li = document.createElement("li");
         li.textContent = k;
